@@ -19,13 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('year')->group(function() {
-    Route::group(['prefix'=>'filmout'], function(){
-        // Routes included with prefix "filmout"
-        Route::get('oldFilms/{year?}',[FilmController::class, "listOldFilms"])->name('oldFilms');
-        Route::get('newFilms/{year?}',[FilmController::class, "listNewFilms"])->name('newFilms');
-        Route::get('films/{year?}/{genre?}',[FilmController::class, "listFilms"])->name('listFilms');
+Route::prefix('filmout')->group(function () {
+    // Rutas con filtro por año que utilizan el middleware 'year'
+    Route::middleware('year')->group(function () {
+        Route::get('oldFilms/{year?}', [FilmController::class, "listOldFilms"])->name('oldFilms');
+        Route::get('newFilms/{year?}', [FilmController::class, "listNewFilms"])->name('newFilms');
+        Route::get('filmsByYear/{year?}', [FilmController::class, "listFilmsByYear"])->name('filmsByYear');
+        Route::get('filmsByGenre/{genre?}', [FilmController::class, "listFilmsByGenre"])->name('filmsByGenre');
     });
 });
-
-
