@@ -26,5 +26,6 @@ Route::prefix('filmout')->group(function () {
         Route::get('newFilms/{year?}', [FilmController::class, "listNewFilms"])->name('newFilms');
         Route::get('filmsByYear/{year?}', [FilmController::class, "listFilmsByYear"])->name('filmsByYear');
         Route::get('filmsByGenre/{genre?}', [FilmController::class, "listFilmsByGenre"])->name('filmsByGenre');
+        Route::get('sortFilms', [FilmController::class, "sortFilms"])->name('sortFilms');
     });
 });
